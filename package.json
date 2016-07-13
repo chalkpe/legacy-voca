@@ -1,0 +1,29 @@
+{
+  "name": "voca",
+  "version": "1.0.0",
+  "description": "Online vocabulary exercise",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChalkPE/voca.git"
+  },
+  "keywords": [
+    "dimigo",
+    "voca"
+  ],
+  "author": "Chalk <chalk@chalk.pe> (http://chalk.pe)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ChalkPE/voca/issues"
+  },
+  "homepage": "https://github.com/ChalkPE/voca#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "pug": "^2.0.0-beta3"
+  }
+}

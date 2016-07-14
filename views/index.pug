@@ -1,19 +1,4 @@
-extends layout
+extends page
 
-mixin menu(text, href, classes)
-    a.item(class=classes, href=href)= text
-
-append stylesheets
-    link(rel='stylesheet', type='text/css', href='css/index.css')
-
-block body
-    .ui.huge.borderless.secondary.pointing.stackable.menu
-        .ui.container
-            +menu('DIMI VOCA', '/', 'header')
-            +menu('Learn', '/learn')
-            +menu('Exam', '/exam')
-            +menu('Download', '/download')
-            +menu('Sign in', '/sign-in', 'right')
-    .ui.piled.segment
-        block main
-        h1 Hello, world!
+append options
+    - let here = '/';

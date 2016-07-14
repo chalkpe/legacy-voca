@@ -16,6 +16,7 @@ if(cluster.isMaster){
     app.set('view engine', 'pug');
     app.use(express.static(path.join(__dirname, 'static')));
 
-    app.get('/', (req, res) => res.render('index', { id }));
+    require('./routes')(app);
+
     app.listen(8080, () => console.log(`Listening on worker #${id}`))
 }

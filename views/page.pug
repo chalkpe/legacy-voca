@@ -1,0 +1,21 @@
+extends layout
+
+mixin menu(text, href, icon, classes)
+    a.item(class=classes + (here === href ? ' active' : ''), href=href)
+        if icon
+            i(class=icon + " icon")
+        |  #{text}
+
+append stylesheets
+    link(rel='stylesheet', type='text/css', href='css/page.css')
+
+block body
+    .ui.borderless.stackable.labeled.icon.menu
+        .ui.container
+            +menu('Home',      '/',         'home',                'header')
+            +menu('Learn',     '/learn',    'book')
+            +menu('Exam',      '/exam',     'star')
+            +menu('Download',  '/download', 'download')
+            +menu('Sign in',   '/sign-in',  'sign in',             'right')
+    .ui.piled.segment
+        block main

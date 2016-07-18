@@ -1,0 +1,26 @@
+extends page
+
+mixin buttons(a, b)
+    .ui.compact.buttons
+        - for(let i = a; i <= b; i++)
+            .ui.day.button= ('0' + i).slice(-2)
+    br
+
+append main
+    .ui.center.aligned.container
+        case book
+            when 'nv':  include includes/days_nv
+            when 'wm':  include includes/days_wm
+            when 'wmr': include includes/days_wmr
+
+
+append stylesheets
+    link(rel='stylesheet', type='text/css', href='css/days.css')
+
+append scripts
+    script.
+        $(function(){
+            $('.ui.day.button').click(function(){
+                $(this).toggleClass('active');
+            })
+        });

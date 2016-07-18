@@ -1,9 +1,10 @@
 body {
     font-family: 'Lato', 'Helvetica Neue', 'Arial', 'Helvetica', 'Noto Sans CJK', 'HCR Dotum', sans-serif;
+    background-color: #fcfcfc;
 }
 
 .main {
-    padding-top: 6em;
+    padding-top: 7em;
 }
 
 #copyright {

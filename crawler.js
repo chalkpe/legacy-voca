@@ -1,3 +1,5 @@
+const COLLECTION = 'days';
+
 var request = require('request');
 var MongoClient = require('mongodb').MongoClient;
 
@@ -9,8 +11,9 @@ MongoClient.connect(url, (err, db) => {
     if(err) return console.error(err);
     console.log("Connected!");
 
-    let days = db.collection('days');
-    for(let day = 1; day <= 60; day++) crawl(days, day);
+    db.dropCollection(COLLECTION, (err, result) => db.createCollection(COLLECTION, (err, days) => {
+        for(let day = 1; day <= 60; day++) crawl(days, day);
+    }));
 });
 
 function crawl(days, day){
@@ -27,9 +30,9 @@ function crawl(days, day){
             en: match[1], ko: match[2], level: match[3]
         }));
 
-        days.update({ day }, { day, words }, { upsert: true }, (err, result) => {
+        days.updateOne({ _id: day }, { _id: day, words }, { upsert: true }, (err, result) => {
             if(err) return console.error(err);
-            console.log(`updated: ${day} (total ${result.result.n})`);
+            console.log(`updated: ${day} (total ${words.length})`);
         });
     });
 }

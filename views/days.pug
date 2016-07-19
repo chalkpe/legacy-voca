@@ -1,13 +1,23 @@
 extends page
 
 mixin buttons(a, b)
-    .ui.compact.buttons
-        - for(let i = a; i <= b; i++)
-            .ui.day.button= ('0' + i).slice(-2)
-    br
+    .ui.centered.mobile.only.grid
+        .ui.buttons
+            - for(let i = a; i <= (a + b) / 2; i++)
+                .ui.day.button= ('0' + i).slice(-2)
+
+    .ui.centered.mobile.only.grid
+        .ui.buttons
+            - for(let i = Math.ceil((a + b) / 2); i <= b; i++)
+                .ui.day.button= ('0' + i).slice(-2)
+
+    .ui.centered.tablet.computer.only.grid
+        .ui.buttons
+            - for(let i = a; i <= b; i++)
+                .ui.day.button= ('0' + i).slice(-2)
 
 append main
-    .ui.center.aligned.container
+    .ui.container
         case book
             when 'nv':  include includes/days_nv
             when 'wm':  include includes/days_wm

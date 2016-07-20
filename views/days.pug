@@ -1,20 +1,23 @@
 extends page
 
+mixin button(i)
+    a.ui.day.button(href='/learn/' + i)= ('0' + i).slice(-2)
+
 mixin buttons(a, b)
     .ui.centered.mobile.only.grid
         .ui.buttons
             - for(let i = a; i <= (a + b) / 2; i++)
-                .ui.day.button= ('0' + i).slice(-2)
+                +button(i)
 
     .ui.centered.mobile.only.grid
         .ui.buttons
             - for(let i = Math.ceil((a + b) / 2); i <= b; i++)
-                .ui.day.button= ('0' + i).slice(-2)
+                +button(i)
 
     .ui.centered.tablet.computer.only.grid
         .ui.buttons
             - for(let i = a; i <= b; i++)
-                .ui.day.button= ('0' + i).slice(-2)
+                +button(i)
 
 append main
     .ui.container

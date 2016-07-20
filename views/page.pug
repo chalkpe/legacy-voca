@@ -6,7 +6,7 @@ mixin menu(href, icon, classes)
             i(class=icon + " icon")
 
 append stylesheets
-    link(rel='stylesheet', type='text/css', href='css/page.css')
+    link(rel='stylesheet', type='text/css', href='/css/page.css')
 
 block body
     .ui.inverted.fixed.borderless.massive.icon.menu
@@ -17,7 +17,5 @@ block body
             +menu('/download', 'download')
             .right.menu
                 +menu('/sign-in',  'sign in')
-    .ui.container
-        .ui.huge.header= menuName
+    #main.ui.container
         block main
-    #copyright.ui.horizontal.divider &copy; 2016 Junyoung Park

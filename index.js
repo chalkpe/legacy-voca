@@ -4,6 +4,7 @@ var cluster = require('cluster');
 var express = require('express');
 
 var vocaPackage = require('./package.json');
+var MongoClient = require('mongodb').MongoClient;
 
 if(cluster.isMaster){
     os.cpus().forEach(() => cluster.fork());
@@ -18,7 +19,10 @@ if(cluster.isMaster){
     app.set('view engine', 'pug');
     app.use(express.static(path.join(__dirname, 'static')));
 
-    require('./routes')(app, vocaPackage);
+    MongoClient.connect('mongodb://localhost:27017/voca', (err, db) => {
+        if(err) return console.error(err);
 
-    app.listen(8080, () => console.log(`Listening on worker #${id}`))
+        require('./routes')(app, vocaPackage, db);
+        app.listen(8080, () => console.log(`Listening on worker #${id}`));
+    });
 }

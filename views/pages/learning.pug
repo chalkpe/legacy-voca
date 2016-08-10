@@ -1,0 +1,28 @@
+extends page
+
+append options
+    - let here = '/learn';
+    - let menuName = 'Learning';
+    
+append stylesheets
+    link(rel='stylesheet', type='text/css', href='/css/learning.css')
+    
+mixin word(data, index)
+    #word.column
+        .ui.right.aligned.container
+            | #{index + 1}/#{words.length}
+            .ui.star.rating(data-rating=data.level, data-max-rating='3')
+        .ui.vertical.animated.massive.fluid.button
+            .hidden.content= data.meaning
+            .visible.content= data.word
+
+append main
+    .ui.stackable.two.column.grid
+        each data, index in words
+            +word(data, index)
+
+append scripts
+    script.
+        $(function(){
+            $('.ui.rating').rating('disable');
+        });

@@ -1,10 +1,13 @@
+body, .ui.button {
+    font-family: 'Lato', 'Helvetica Neue', 'Arial', 'Helvetica', 'Noto Sans KR', 'HCR Dotum', sans-serif !important;
+}
+
 body {
-    font-family: 'Lato', 'Helvetica Neue', 'Arial', 'Helvetica', 'Noto Sans CJK', 'HCR Dotum', sans-serif;
     background-color: #fcfcfc;
 }
 
 #main {
-    padding-top: 7em;
+    padding-top: 5em;
 }
 
 #copyright {

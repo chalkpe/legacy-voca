@@ -1,13 +1,15 @@
-
-
 module.exports = (app, vocaPackage, db) => {
-    let days = db.collection('days_wmr');
+    let col = db.collection('days_wmr');
+    
+    let count;
+    col.count({}, (err, c) => count = c);
+    
 
-    app.get('/',         (req, res) => res.render('home', { version: vocaPackage.version }));
+    app.get('/',         (req, res) => res.render('pages/home', { version: vocaPackage.version }));
+    
+    app.get('/learn/:day', (req, res) => col.findOne({ _id: parseInt(req.params.day, 10) }, (err, day) => res.render('pages/learning', { words: day.words })));
+    app.get('/learn',      (req, res) => res.render('pages/learn', { book: 'wmr' }));
 
-    app.get('/learn/:day', (req, res) => days.findOne({ _id: req.params.day }, (err, day) => res.render('day', { words: day.words })));
-    app.get('/learn',      (req, res) => res.render('learn', { book: 'wmr' }));
-
-    app.get('/exam',     (req, res) => res.render('exam'));
-    app.get('/download', (req, res) => res.render('download'));
+    app.get('/exam',     (req, res) => res.render('pages/exam'));
+    app.get('/download', (req, res) => res.render('pages/download'));
 };

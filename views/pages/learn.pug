@@ -3,3 +3,16 @@ extends page
 append options
     - let here = '/learn';
     - let menuName = 'Learn';
+
+mixin book(id, name)
+    a.card(href='/learn/' + id)
+        .image
+            img(src='/img/book_' + id + '.jpg')
+        .content
+            .header= name
+
+append main
+    .ui.centered.four.doubling.cards
+        +book('nv', '능률 VOCA')
+        +book('wmr', '워드마스터 (개정)')
+        +book('wm',  '워드마스터 (기존)')

@@ -1,0 +1,37 @@
+extends page
+
+append options
+    - let here = '/learn';
+    - let menuName = 'Learn';
+
+append stylesheets
+    link(rel='stylesheet', type='text/css', href='/css/days.css')
+
+mixin days(v)
+    - var i = 0;
+    - var n = count - count % v;
+
+    while i < n
+        .ui.days.buttons(class=(v === 5) ? 'five': '')
+            - var j = 1;
+            while j <= v
+                +day(i + j++)
+            - i += v;
+
+    - var i = 1;
+    - var m = count % v;
+
+    if m > 0
+        .ui.days.buttons
+            while i <= m
+                +day(n + i++)
+
+mixin day(i)
+    a.ui.big.button(href='/learn/' + book + '/' + i)= ("0" + i).slice(-2)
+
+append main
+    .ui.centered.mobile.only.grid
+        +days(5)
+
+    .ui.centered.tablet.computer.only.grid
+        +days(10)

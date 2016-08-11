@@ -1,7 +1,7 @@
 extends ../layout
 
 mixin menu(href, icon, classes)
-    a.item(class=classes + (here === href ? ' active' : ''), href=href)
+    a.item(class=(here === href ? ' active' : '') + (classes ? ' ' + classes : ''), href=href)
         if icon
             i(class=icon + " icon")
 

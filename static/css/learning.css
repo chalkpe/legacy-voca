@@ -1,7 +1,11 @@
-#word .ui.right.aligned.container {
+.word.column .ui.right.aligned.container {
     margin-bottom: 0.5em;
 }
 
-#word .ui.star {
+.word.column .star {
     margin-left: 0.5em;
+}
+
+.word.column .ui.massive.button {
+    text-transform: capitalize;
 }

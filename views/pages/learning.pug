@@ -3,12 +3,12 @@ extends page
 append options
     - let here = '/learn';
     - let menuName = 'Learning';
-    
+
 append stylesheets
     link(rel='stylesheet', type='text/css', href='/css/learning.css')
-    
+
 mixin word(data, index)
-    #word.column
+    .word.column
         .ui.right.aligned.container
             | #{index + 1}/#{words.length}
             .ui.star.rating(data-rating=data.level, data-max-rating='3')

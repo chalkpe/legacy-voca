@@ -1,15 +1,29 @@
 module.exports = (app, vocaPackage, db) => {
-    let col = db.collection('days_wmr');
-    
-    let count;
-    col.count({}, (err, c) => count = c);
-    
+    app.get('/', (req, res) => res.render('pages/home', { version: vocaPackage.version }));
 
-    app.get('/',         (req, res) => res.render('pages/home', { version: vocaPackage.version }));
-    
-    app.get('/learn/:day', (req, res) => col.findOne({ _id: parseInt(req.params.day, 10) }, (err, day) => res.render('pages/learning', { words: day.words })));
-    app.get('/learn',      (req, res) => res.render('pages/learn', { book: 'wmr' }));
+    app.get('/learn/:book/:day', (req, res, next) => db.collection('days_' + req.params.book, (err, col) => {
+        if(err) return next(err);
+        if(!col) return next();
 
+        col.findOne({ _id: parseInt(req.params.day, 10) }, (err, day) => {
+            if(err) return next(err);
+            if(!day) return next();
+
+            res.render('pages/learning', { words: day.words });
+        });
+    }));
+
+    app.get('/learn/:book', (req, res, next) => db.collection('days_' + req.params.book, (err, col) => {
+        if(err) return next(err);
+        if(!col) return next();
+
+        col.count({}, (err, count) => {
+            if(err) return next(err);
+            res.render('pages/days', { book: req.params.book, count });
+        });
+    }));
+
+    app.get('/learn',    (req, res) => res.render('pages/learn'));
     app.get('/exam',     (req, res) => res.render('pages/exam'));
     app.get('/download', (req, res) => res.render('pages/download'));
 };

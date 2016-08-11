@@ -1,4 +1,4 @@
-body, .ui.button {
+body, .ui.button, .card > .content > .header {
     font-family: 'Lato', 'Helvetica Neue', 'Arial', 'Helvetica', 'Noto Sans KR', 'HCR Dotum', sans-serif !important;
 }
 
@@ -7,7 +7,8 @@ body {
 }
 
 #main {
-    padding-top: 5em;
+    padding-top: 6em;
+    padding-bottom: 4em;
 }
 
 #copyright {

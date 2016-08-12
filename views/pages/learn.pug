@@ -5,9 +5,9 @@ append options
     - let menuName = 'Learn';
 
 mixin card(book)
-    a.card(href='/learn/' + book._id)
+    a.card(href='/learn/' + book.id)
         .image
-            img(src='/img/book_' + book._id + '.jpg')
+            img(src='/img/book_' + book.id + '.jpg')
         .content
             .header= book.name
 

@@ -4,6 +4,8 @@ var Day = require('../models/Day');
 var Book = require('../models/Book');
 
 module.exports = (app) => {
+    const developing = app.get('env') === 'development';
+
     app.get('/', (req, res) => res.render('pages/home', { version: vocaPackage.version }));
 
     app.get('/learn/:book/:day', (req, res, next) => Day.findOne({ book: req.params.book, day: req.params.day }, (err, day) => {
@@ -23,4 +25,17 @@ module.exports = (app) => {
 
     app.get('/exam',     (req, res) => res.render('pages/exam'));
     app.get('/download', (req, res) => res.render('pages/download'));
+
+    app.use((req, res, next) => {
+        var err = new Error('Not Found');
+        err.status = 404; next(err);
+    });
+
+    app.use(function(err, req, res, next){
+        res.status(err.status || 500);
+        res.render('error', {
+            status: err.status,
+            stack: developing && err.stack
+        });
+    });
 };

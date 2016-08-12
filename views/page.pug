@@ -1,4 +1,4 @@
-extends ../layout
+extends layout
 
 mixin menu(href, icon, classes)
     a.item(class=(here === href ? ' active' : '') + (classes ? ' ' + classes : ''), href=href)

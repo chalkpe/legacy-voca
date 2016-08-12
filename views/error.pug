@@ -1,0 +1,18 @@
+extends page
+
+block main
+    .ui.center.aligned.container
+        .ui.text.header
+            h1.ui.big.icon.header
+                i.red.warning.sign.icon
+                .content Oops!
+                .sub.header #{status || '500'}: We can't find the page you're looking for.
+
+        i.ui.big.primary.button(href='/')
+            | Back to home
+            i.chevron.right.icon
+
+        if stack
+            #stack.ui.padded.piled.compact.left.aligned.segment
+                pre
+                    code= stack

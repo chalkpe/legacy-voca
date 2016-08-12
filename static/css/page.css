@@ -14,3 +14,14 @@ body {
 #copyright {
     margin-top: 3em;
 }
+
+pre {
+    white-space: pre-wrap;
+    overflow: hidden;
+}
+
+#stack.segment {
+    margin-top: 4em !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}

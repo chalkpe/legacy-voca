@@ -4,15 +4,14 @@ append options
     - let here = '/learn';
     - let menuName = 'Learn';
 
-mixin book(id, name)
-    a.card(href='/learn/' + id)
+mixin card(book)
+    a.card(href='/learn/' + book._id)
         .image
-            img(src='/img/book_' + id + '.jpg')
+            img(src='/img/book_' + book._id + '.jpg')
         .content
-            .header= name
+            .header= book.name
 
 append main
     .ui.centered.four.doubling.cards
-        +book('nv', '능률 VOCA')
-        +book('wmr', '워드마스터 (개정)')
-        +book('wm',  '워드마스터 (기존)')
+        each book in books
+            +card(book)

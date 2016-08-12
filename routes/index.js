@@ -23,7 +23,17 @@ module.exports = (app, vocaPackage, db) => {
         });
     }));
 
-    app.get('/learn',    (req, res) => res.render('pages/learn'));
+    app.get('/learn', (req, res) => db.collection('books', (err, col) => {
+        if(err) return next(err);
+        if(!col) return next();
+
+        col.find().toArray((err, books) => {
+            if(err) return next(err);
+            if(!books) return next();
+
+            res.render('pages/learn', { books });
+        });
+    }));
     app.get('/exam',     (req, res) => res.render('pages/exam'));
     app.get('/download', (req, res) => res.render('pages/download'));
 };

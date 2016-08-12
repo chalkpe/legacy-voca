@@ -20,7 +20,10 @@ if(cluster.isMaster){
     app.use(express.static(path.join(__dirname, 'static')));
 
     MongoClient.connect('mongodb://localhost:27017/voca', (err, db) => {
-        if(err) return console.error(err);
+        if(err){
+            console.error(err);
+            process.exit(1);
+        }
 
         require('./routes')(app, vocaPackage, db);
         app.listen(8080, () => console.log(`Listening on worker #${id}`));

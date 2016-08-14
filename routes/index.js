@@ -18,7 +18,7 @@ module.exports = (app) => {
         res.render('pages/days', { book: req.params.book, count });
     }));
 
-    app.get('/learn', (req, res) => Book.find().sort('id').exec((err, books) => {
+    app.get('/learn', (req, res, next) => Book.find().sort('id').exec((err, books) => {
         if(err) return next(err); if(!books || !books.length) return next();
         res.render('pages/learn', { books });
     }));

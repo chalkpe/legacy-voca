@@ -7,7 +7,7 @@ append options
 mixin card(book)
     a.card(href='/learn/' + book.id)
         .image
-            img(src='/img/book_' + book.id + '.jpg')
+            img(src=book.image)
         .content
             .header= book.name
 

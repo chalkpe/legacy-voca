@@ -1,0 +1,11 @@
+.ui.header > .image, .ui.header > img {
+    width: 2em;
+}
+
+#main {
+    max-width: 512px !important;
+}
+
+form {
+    margin-top: 2em !important;
+}

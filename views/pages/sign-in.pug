@@ -1,0 +1,31 @@
+extends ../page
+
+append options
+    - let here = '/sign-in';
+    - let menuName = 'Sign in';
+
+append stylesheets
+    style.
+        #main { height: 100%; }
+        #main .column { max-width: 512px; }
+
+append main
+    .ui.middle.aligned.center.aligned.grid
+        .column
+            h2.ui.big.icon.header
+                i.sign.in.icon
+                .content Sign in to your account
+            .ui.stacked.segment
+                form.ui.large.form
+                    .field
+                        .ui.left.icon.input
+                            i.mail.icon
+                            input(name='email', placeholder='Email', type="email")
+                    .field
+                        .ui.left.icon.input
+                            i.lock.icon
+                            input(name='password', placeholder='Password', type="password")
+                    .ui.fluid.large.blue.submit.button Sign in
+            .ui.message
+                | New to here?&nbsp;
+                a(href='/sign-up') Sign up.

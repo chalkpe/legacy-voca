@@ -2,8 +2,59 @@ extends ../page
 
 append options
     - let here = '/';
-    - let menuName = title || 'DIMI VOCA';
+    - let menuName = title || 'Voca';
+
+append stylesheets
+    link(rel='stylesheet', type='text/css', href='/css/home.css')
+
+append scripts
+    script.
+        $(function(){
+            $('.ui.checkbox').checkbox();
+        });
 
 block main
-    h1= menuName
-    p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    h1.ui.header
+        img.ui.circular.image(src='favicon.png', width='1em', height='1em')
+        .content
+            | #{title || 'Voca'}
+            .sub.header= vocaPackage.description
+
+    form.ui.stacked.segment.equal.width.form
+        .field
+            label Email
+            .ui.left.icon.input
+                i.mail.icon
+                input(name='email', placeholder='Email', type='email')
+        .fields
+            .field
+                label Password
+                .ui.left.icon.input
+                    i.lock.icon
+                    input(name='password', placeholder='Password', type='password', minlength='8')
+            .field
+                label Confirm password
+                .ui.left.icon.input
+                    i.lock.icon
+                    input(name='password-confirm', placeholder='Confirm password', type='password', minlength='8')
+        .fields
+            .field
+                label Name
+                .ui.left.icon.input
+                    i.user.icon
+                    input(name='name', placeholder='Name', type='text')
+            .field
+                label Student ID
+                .ui.left.icon.input
+                    i.student.icon
+                    input(name='studentId', placeholder='Student ID', type='text', maxlength='5')
+        .inline.field
+            .ui.checkbox
+                input.hidden(type='checkbox')
+                label Yes, I'd like to receive email updates.
+        .ui.blue.submit.button Create account
+
+    .ui.center.aligned.message
+        i.help.icon
+        | Already have an account?&nbsp;
+        a(href='/sign-in') Click here.

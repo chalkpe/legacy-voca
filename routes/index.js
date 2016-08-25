@@ -3,10 +3,32 @@ var vocaPackage = require('../package.json');
 var Day = require('../models/Day');
 var Book = require('../models/Book');
 
-module.exports = (app) => {
+function isAuthenticated(req, res, next){
+   if(req.isAuthenticated()) return next();
+   res.redirect('/');
+}
+
+module.exports = (app, passport) => {
     const developing = app.get('env') === 'development';
 
-    app.get('/', (req, res) => res.render('pages/home', { vocaPackage }));
+    app.get('/', (req, res) => res.render('pages/home', { message: req.flash('message'), vocaPackage }));
+    app.post('/', passport.authenticate('sign-up', {
+        successRedirect: '/profile',
+        failureRedirect: '/',
+        failureFlash: true
+    }));
+
+    app.get('/sign-in', (req, res) => res.render('pages/sign-in', { message: req.flash('message') }));
+    app.post('/sign-in', passport.authenticate('sign-in', {
+        successRedirect: '/profile',
+        failureRedirect: '/sign-in',
+        failureFlash: true
+    }));
+
+    app.get('/sign-out', (req, res) => {
+        req.logout();
+        res.redirect('/');
+    });
 
     app.get('/learn/:book/:day', (req, res, next) => Day.findOne({ book: req.params.book, day: req.params.day }, (err, day) => {
         if(err) return next(err); if(!day) return next();
@@ -24,7 +46,6 @@ module.exports = (app) => {
     }));
 
     app.get('/exam',     (req, res) => res.render('pages/exam'));
-    app.get('/sign-in',  (req, res) => res.render('pages/sign-in'));
     app.get('/download', (req, res) => res.render('pages/download'));
 
     app.use((req, res, next) => {

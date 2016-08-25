@@ -1,0 +1,44 @@
+append scripts
+    script.
+        $(function(){
+            $('.ui.checkbox').checkbox();
+        });
+
+form.ui.stacked.segment.equal.width.form(action='/', method='post')
+    .field
+        label Email
+        .ui.left.icon.input
+            i.mail.icon
+            input(name='email', placeholder='Email', type='email')
+    .fields
+        .field
+            label Password
+            .ui.left.icon.input
+                i.lock.icon
+                input(name='password', placeholder='Password', type='password', minlength='8')
+        .field
+            label Confirm password
+            .ui.left.icon.input
+                i.lock.icon
+                input(name='password-confirm', placeholder='Confirm password', type='password', minlength='8')
+    .fields
+        .field
+            label Name
+            .ui.left.icon.input
+                i.user.icon
+                input(name='name', placeholder='Name', type='text')
+        .field
+            label Student ID
+            .ui.left.icon.input
+                i.student.icon
+                input(name='studentId', placeholder='Student ID', type='text', maxlength='5')
+    .inline.field
+        .ui.checkbox
+            input.hidden(type='checkbox')
+            label Yes, I'd like to receive email updates.
+    button.ui.blue.submit.button(type='submit') Create account
+
+.ui.center.aligned.message
+    i.help.icon
+    | Already have an account?&nbsp;
+    a(href='/sign-in') Click here.

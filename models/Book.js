@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Book', mongoose.Schema({
-    id: String, name: String, image: String
+    id: { type: String, unique: true }, name: String, image: String
 }));

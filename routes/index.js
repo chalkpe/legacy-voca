@@ -3,24 +3,35 @@ var vocaPackage = require('../package.json');
 var Day = require('../models/Day');
 var Book = require('../models/Book');
 
-function isAuthenticated(req, res, next){
-   if(req.isAuthenticated()) return next();
-   res.redirect('/');
-}
-
 module.exports = (app, passport) => {
     const developing = app.get('env') === 'development';
 
-    app.get('/', (req, res) => res.render('pages/home', { message: req.flash('message'), vocaPackage }));
+    function isAuthenticated(req, res, next){
+        if(req.isAuthenticated()) return next();
+        res.redirect('/');
+    }
+
+    function flash(req, res, next){
+        res.locals.message = req.flash('message');
+        next();
+    }
+
+    app.use((req, res, next) => {
+        res.locals.user = req.user;
+        res.locals.title = app.get('title');
+        next();
+    });
+
+    app.get('/', flash, (req, res) => res.render('pages/home', { vocaPackage }));
     app.post('/', passport.authenticate('sign-up', {
-        successRedirect: '/profile',
+        successRedirect: '/',
         failureRedirect: '/',
         failureFlash: true
     }));
 
-    app.get('/sign-in', (req, res) => res.render('pages/sign-in', { message: req.flash('message') }));
+    app.get('/sign-in', flash, (req, res) => res.render('pages/sign-in'));
     app.post('/sign-in', passport.authenticate('sign-in', {
-        successRedirect: '/profile',
+        successRedirect: '/',
         failureRedirect: '/sign-in',
         failureFlash: true
     }));

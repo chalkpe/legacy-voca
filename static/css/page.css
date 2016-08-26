@@ -1,5 +1,5 @@
-body, .ui.button, .card > .content > .header {
-    font-family: 'Lato', 'Helvetica Neue', 'Arial', 'Helvetica', 'Noto Sans KR', 'HCR Dotum', sans-serif !important;
+body, .button, .header, .item {
+    font-family: 'Lato', 'Noto Sans KR', 'HCR Dotum', sans-serif !important;
 }
 
 body {

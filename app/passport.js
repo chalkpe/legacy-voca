@@ -16,7 +16,7 @@ module.exports = () => {
 
         var newUser = new User({
             email, name: req.body.name,
-            studentId: req.body.studentId
+            studentId: req.body.studentId, subscribe: req.body.subscribe
         });
 
         newUser.password = newUser.hash(password);
@@ -25,8 +25,8 @@ module.exports = () => {
 
     passport.use('sign-in', new LocalStrategy(config, (req, email, password, done) => process.nextTick(() => User.findOne({ email }, (err, user) => {
         if(err) return done(err);
-        if(!user) return done(null, false, req.flash('message', 'No user found.'));
-        if(!user.check(password)) return done(null, false, req.flash('message', 'Wrong password.'));
+        if(!user) return done(null, false, req.flash('message', 'Incorrect email or password.'));
+        if(!user.check(password)) return done(null, false, req.flash('message', 'Incorrect email or password.'));
 
         return done(null, user);
     }))));

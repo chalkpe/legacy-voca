@@ -1,0 +1,17 @@
+mixin menu(href, icon, classes)
+    a.item(class=(here === href ? ' active' : '') + (classes ? ' ' + classes : ''), href=href)
+        if icon
+            i(class=icon + " icon")
+
+.ui.inverted.fixed.borderless.massive.icon.menu
+    .ui.container
+        +menu('/',         'home', 'header')
+        +menu('/learn',    'book')
+        +menu('/exam',     'star')
+        +menu('/download', 'download')
+        .right.menu
+            if !user
+                +menu('/sign-in',  'sign in')
+            else
+                a.item= user.name
+                +menu('/sign-out',  'sign out')

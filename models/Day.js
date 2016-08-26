@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-module.exports = mongoose.model('Day', mongoose.Schema({
+var schema = mongoose.Schema({
     book: String,
     day: Number,
     words: [{
@@ -8,4 +8,7 @@ module.exports = mongoose.model('Day', mongoose.Schema({
         meaning: String,
         level: Number
     }]
-}));
+});
+
+schema.index({ book: 1, day: 1 }, { unique: true });
+module.exports = mongoose.model('Day', schema);

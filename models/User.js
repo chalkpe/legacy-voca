@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
 const schema = mongoose.Schema({
-    email: String, password: String,
-    name: String, studentId: Number
+    email: { type: String, unique: true },
+    password: String, name: String, studentId: Number, subscribe: Boolean
 });
 
 schema.methods.hash = (password) => bcrypt.hashSync(password);

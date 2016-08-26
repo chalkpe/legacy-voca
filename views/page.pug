@@ -9,13 +9,6 @@ append stylesheets
     link(rel='stylesheet', type='text/css', href='/css/page.css')
 
 block body
-    .ui.inverted.fixed.borderless.massive.icon.menu
-        .ui.container
-            +menu('/',         'home', 'header')
-            +menu('/learn',    'book')
-            +menu('/exam',     'star')
-            +menu('/download', 'download')
-            .right.menu
-                +menu('/sign-in',  'sign in')
+    include includes/menu
     #main.ui.container
         block main

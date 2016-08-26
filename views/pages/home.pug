@@ -14,4 +14,7 @@ block main
             | #{title || 'Voca'}
             .sub.header= vocaPackage.description
 
-    include ../includes/sign-up
+    if !user
+        include ../includes/sign-up
+    else
+        include ../includes/profile

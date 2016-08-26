@@ -15,6 +15,12 @@ append main
             h2.ui.big.icon.header
                 i.sign.in.icon
                 .content Sign in to your account
+
+            if message.length > 0
+                .ui.error.message
+                    i.close.icon
+                    | #{message}
+
             .ui.stacked.segment
                 form.ui.large.form(action='/sign-in', method='post')
                     .field
@@ -27,5 +33,6 @@ append main
                             input(name='password', placeholder='Password', type="password")
                     button.ui.fluid.large.blue.submit.button(type='submit') Sign in
             .ui.message
-                | New to here?&nbsp;
-                a(href='/sign-up') Sign up.
+                | New to #{title || 'here'}?&nbsp;
+                a(href='/sign-up') Create an account
+                | .

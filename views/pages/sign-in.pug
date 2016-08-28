@@ -4,6 +4,9 @@ append options
     - let here = '/sign-in';
     - let menuName = 'Sign in';
 
+append scripts
+    script(src='/js/sign-in.js')
+
 append stylesheets
     style.
         #main { height: 100%; }
@@ -31,7 +34,8 @@ append main
                         .ui.left.icon.input
                             i.lock.icon
                             input(name='password', placeholder='Password', type="password")
-                    button.ui.fluid.large.blue.submit.button(type='submit') Sign in
+                    button.ui.fluid.large.primary.submit.button(type='submit') Sign in
+                    .ui.error.message
             .ui.message
                 | New to #{title || 'here'}?&nbsp;
                 a(href='/sign-up') Create an account

@@ -1,8 +1,5 @@
 append scripts
-    script.
-        $(function(){
-            $('.ui.checkbox').checkbox();
-        });
+    script(src='/js/sign-up.js')
 
 #form
     if message.length > 0
@@ -26,7 +23,7 @@ append scripts
                 label Confirm password
                 .ui.left.icon.input
                     i.lock.icon
-                    input(name='password-confirm', placeholder='Confirm password', type='password', minlength='8')
+                    input(name='confirm', placeholder='Confirm password', type='password', minlength='8')
         .fields
             .field
                 label Name
@@ -42,9 +39,11 @@ append scripts
             .ui.checkbox
                 input.hidden(name='subscribe', type='checkbox')
                 label Yes, I'd like to receive email updates.
-        button.ui.blue.submit.button(type='submit') Create account
+        button.ui.primary.submit.button(type='submit') Create account
+        .ui.error.message
 
     .ui.center.aligned.message
         i.help.icon
         | Already have an account?&nbsp;
-        a(href='/sign-in') Click here.
+        a(href='/sign-in') Click here
+        | .

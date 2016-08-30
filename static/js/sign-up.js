@@ -7,7 +7,7 @@ $(function(){
             password: 'minLength[8]',
             confirm: 'match[password]',
 
-            name: ['minLength[2]', 'maxLength[4]', 'regExp[/^[가-힣]+$/]'],
+            name: 'minLength[2]',
             studentId: ['integer', 'minLength[4]', 'maxLength[5]']
         }
     });

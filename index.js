@@ -26,7 +26,6 @@ db.on('error', err => {
 
 const express = require('express');
 const passport = require('passport');
-const vocaPackage = require('./package.json');
 
 const path = require('path');
 const logger = require('morgan');
@@ -37,15 +36,18 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const connect = require('connect-mongo');
 const session = require('express-session');
+const validator = require('express-validator');
 
 const app = express();
 app.set('view engine', 'pug');
 app.set('port', process.env.PORT || '8080');
 
 app.use(logger('dev'));
-app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(validator());
+app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
 

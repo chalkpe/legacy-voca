@@ -21,8 +21,12 @@ append main
 
             if message.length > 0
                 .ui.error.message
-                    i.close.icon
-                    | #{message}
+                    if Array.isArray(message)
+                        ul.list
+                            each msg in message
+                                li= msg
+                    else
+                        | #{message}
 
             .ui.stacked.segment
                 form.ui.large.form(action='/sign-in', method='post')

@@ -1,13 +1,9 @@
 extends ../page
 
-append options
-    - let here = '/';
-    - let menuName = title || 'Voca';
-
 append stylesheets
     link(rel='stylesheet', type='text/css', href='/css/home.css')
 
-block main
+append main
     h1.ui.header
         img.ui.circular.image(src='favicon.png', width='1em', height='1em')
         .content

@@ -1,9 +1,5 @@
 extends ../page
 
-append options
-    - let here = '/learn';
-    - let menuName = 'Learn';
-
 append stylesheets
     link(rel='stylesheet', type='text/css', href='/css/days.css')
 
@@ -27,7 +23,7 @@ mixin days(v)
                 +day(n + i++)
 
 mixin day(i)
-    a.ui.big.button(href='/learn/' + book + '/' + i)= ("0" + i).slice(-2)
+    a.ui.big.button(href=here + '/' + book + '/' + i)= ("0" + i).slice(-2)
 
 append main
     .ui.centered.mobile.only.grid

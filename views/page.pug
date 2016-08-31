@@ -1,10 +1,5 @@
 extends layout
 
-mixin menu(href, icon, classes)
-    a.item(class=(here === href ? ' active' : '') + (classes ? ' ' + classes : ''), href=href)
-        if icon
-            i(class=icon + " icon")
-
 append stylesheets
     link(rel='stylesheet', type='text/css', href='/css/page.css')
 

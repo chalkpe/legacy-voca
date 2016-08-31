@@ -1,11 +1,7 @@
 extends ../page
 
-append options
-    - let here = '/learn';
-    - let menuName = 'Learn';
-
 mixin card(book)
-    a.card(href='/learn/' + book.id)
+    a.card(href=here + '/' + book.id)
         .image
             img(src=book.image)
         .content

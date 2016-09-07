@@ -43,8 +43,14 @@ function renderLearning(req, res, next, here, day){
 }
 
 function renderExamination(req, res, next, here, day){
-    let count = Math.min(day.words.length, 10);
-    let words = shuffle.pick(day.words, { picks: count });
+    let words = shuffle.pick(day.words, { picks: Math.min(10, day.words.length) });
+
+    words.forEach(word => {
+        let otherWords = day.words.filter(w => w.meaning != word.meaning);
+        let wrongWords = shuffle.pick(otherWords, { picks: Math.min(4, otherWords.length) });
+
+        word.options = shuffle([word, ...wrongWords]);
+    });
 
     res.render('pages/exam', { here, book: day.book, day: day.day, words });
 }

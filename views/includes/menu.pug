@@ -15,3 +15,4 @@ mixin menu(href, icon, classes)
             else
                 a.item= user.name
                 +menu('/sign-out',  'sign out')
+            block rightMenu

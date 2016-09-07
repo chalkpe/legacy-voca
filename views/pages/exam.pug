@@ -1,23 +1,27 @@
 extends ../page
 
 mixin word(data, index)
-    .word.column
-        .field
-            .ui.large.star.rating(data-rating=data.level, data-max-rating='3', style="float: right;")
-            label= data.word
-            input(name=data.word, placeholder=data.word, type="text")
+    .word.sixteen.wide.mobile.eight.wide.tablet.four.wide.computer.column
+        .grouped.fields
+            label.word= data.word
+            .ui.mini.star.rating(data-rating=data.level, data-max-rating='3')
+            each option in data.options
+                .field
+                    .ui.radio.checkbox
+                        input.hidden(tabindex='0', name=data.word, value=option.meaning, type='radio')
+                        label.option= option.meaning
 
 append stylesheets
     link(rel='stylesheet', type='text/css', href='/css/exam.css')
 
 append scripts
-    script.
-        $(function(){
-            $('.ui.rating').rating('disable');
-        });
+    script(src='/js/exam.js')
+
+append rightMenu
+    a.active.blue.item#submit Submit
 
 append main
-    form.ui.massive.form
-        .ui.stackable.two.column.grid
+    form.ui.huge.form(action='/exam/' + book + '/' + day, method='post')
+        .ui.grid.container
             each data, index in words
                 +word(data, index)

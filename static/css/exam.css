@@ -1,11 +1,11 @@
-.word.column label {
+.word.column label.word {
     margin-bottom: 1rem !important;
-}
-
-.word.column .rating {
-    margin-top: 0.15rem !important;
 }
 
 .word.column label, input {
     text-transform: capitalize !important;
+}
+
+.word.column .rating {
+    margin-left: 0.5em !important;
 }

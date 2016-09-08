@@ -18,14 +18,30 @@ function renderExamination(req, res, next, here, day){
 }
 
 function handleExamination(req, res, next, here, day){
-    let words = Object.keys(req.body);
-
     let minCount = Math.min(wordsPerDay, day.words.length);
-    if(words.length < minCount){
+    if(Object.keys(req.body).length < minCount){
         req.flash('message', 'Please fill out all fields');
         res.redirect(`/exam/${day.book}/${day.day}`);
         return;
     }
+
+    let words = new Map(day.words.map(word => [word.word, word.meaning]));
+    if(Object.keys(req.body).some(word => {
+        let meaning = req.body[word];
+
+        let theWord = words.get(word);
+        if(!theWord){
+            req.flash('message', `Invalid word '${word}'`);
+            return true;
+        }
+
+        if(meaning !== theWord.meaning){
+            req.flash('message', `Incorrect answer on '${word}'`);
+            return true;
+        }
+    })) return res.redirect(`/exam/${day.book}/${day.day}`);
+
+    res.redirect();
 }
 
 function flashMessage(req, res, next){

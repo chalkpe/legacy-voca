@@ -18,7 +18,7 @@ module.exports = () => {
             studentId: req.body.studentId, subscribe: req.body.subscribe
         });
 
-        newUser.password = newUser.hash(password);
+        newUser.password = User.hash(password);
         newUser.save(err => done(err, newUser));
     }))));
 

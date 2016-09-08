@@ -3,7 +3,7 @@ mixin menu(href, icon, classes)
         if icon
             i(class=icon + " icon")
 
-.ui.inverted.fixed.borderless.massive.icon.menu
+.ui.inverted.fixed.borderless.large.icon.menu
     .ui.container
         +menu('/',         'home', 'header')
         +menu('/learn',    'book')
@@ -13,6 +13,5 @@ mixin menu(href, icon, classes)
             if !user
                 +menu('/sign-in',  'sign in')
             else
-                a.item= user.name
                 +menu('/sign-out',  'sign out')
             block rightMenu

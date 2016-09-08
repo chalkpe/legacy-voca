@@ -7,7 +7,7 @@ const schema = mongoose.Schema({
 });
 
 schema.statics.hash = (password) => bcrypt.hashSync(password);
-schema.statics.check = function(password){
+schema.methods.check = function(password){
     return bcrypt.compareSync(password, this.password);
 };
 

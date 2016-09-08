@@ -49,7 +49,12 @@ function flashMessage(req, res, next){
     next();
 }
 
+function isAuthenticated(req, res, next){
+    if(!req.isAuthenticated()) return res.redirect('/sign-in');
+    next();
+}
+
 module.exports = (app) => {
-    app.get('/exam/:book/:day', flashMessage, Day.middleware('/exam', renderExamination));
-    app.post('/exam/:book/:day', Day.middleware('/exam', handleExamination));
+    app.get('/exam/:book/:day', isAuthenticated, flashMessage, Day.middleware('/exam', renderExamination));
+    app.post('/exam/:book/:day', isAuthenticated, Day.middleware('/exam', handleExamination));
 };

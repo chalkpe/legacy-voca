@@ -6,8 +6,8 @@ const schema = mongoose.Schema({
     password: String, name: String, studentId: Number, subscribe: Boolean
 });
 
-schema.methods.hash = (password) => bcrypt.hashSync(password);
-schema.methods.check = function(password){
+schema.statics.hash = (password) => bcrypt.hashSync(password);
+schema.statics.check = function(password){
     return bcrypt.compareSync(password, this.password);
 };
 

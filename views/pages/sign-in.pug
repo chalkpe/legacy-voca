@@ -14,16 +14,7 @@ append main
             h2.ui.big.icon.header
                 i.sign.in.icon
                 .content Sign in to your account
-
-            if message.length > 0
-                .ui.error.message
-                    if Array.isArray(message)
-                        ul.list
-                            each msg in message
-                                li= msg
-                    else
-                        | #{message}
-
+            include ../includes/error
             .ui.stacked.segment
                 form.ui.large.form(action='/sign-in', method='post')
                     .field

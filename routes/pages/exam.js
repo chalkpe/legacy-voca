@@ -1,0 +1,39 @@
+const Day = require('../../models/Day');
+const shuffle = require('shuffle-array');
+
+const wordsPerDay = 10;
+const optionsPerWord = 5;
+
+function renderExamination(req, res, next, here, day){
+    let words = shuffle.pick(day.words, { picks: Math.min(wordsPerDay, day.words.length) });
+
+    words.forEach(word => {
+        let otherWords = day.words.filter(w => w.meaning != word.meaning);
+        let wrongWords = shuffle.pick(otherWords, { picks: Math.min(optionsPerWord - 1, otherWords.length) });
+
+        word.options = shuffle([word, ...wrongWords]);
+    });
+
+    res.render('pages/exam', { here, book: day.book, day: day.day, words });
+}
+
+function handleExamination(req, res, next, here, day){
+    let words = Object.keys(req.body);
+
+    let minCount = Math.min(wordsPerDay, day.words.length);
+    if(words.length < minCount){
+        req.flash('message', 'Please fill out all fields');
+        res.redirect(`/exam/${day.book}/${day.day}`);
+        return;
+    }
+}
+
+function flashMessage(req, res, next){
+    res.locals.message = req.flash('message');
+    next();
+}
+
+module.exports = (app) => {
+    app.get('/exam/:book/:day', flashMessage, Day.middleware('/exam', renderExamination));
+    app.post('/exam/:book/:day', Day.middleware('/exam', handleExamination));
+};

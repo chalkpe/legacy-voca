@@ -1,0 +1,8 @@
+if message.length > 0
+    .ui.error.message
+        if Array.isArray(message)
+            ul.list
+                each msg in message
+                    li= msg
+        else
+            | #{message}

@@ -2,15 +2,7 @@ append scripts
     script(src='/js/sign-up.js')
 
 #form
-    if message.length > 0
-        .ui.error.message
-            if Array.isArray(message)
-                ul.list
-                    each msg in message
-                        li= msg
-            else
-                | #{message}
-
+    include error
     form.ui.stacked.segment.equal.width.form(action='/', method='post')
         .field
             label Email

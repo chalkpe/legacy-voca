@@ -9,3 +9,7 @@
 .word.column .rating {
     margin-left: 0.5em !important;
 }
+
+.ui.error.message {
+    margin-bottom: 2em;
+}

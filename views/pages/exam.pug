@@ -3,12 +3,12 @@ extends ../page
 mixin word(data, index)
     .word.sixteen.wide.mobile.eight.wide.tablet.four.wide.computer.column
         .grouped.fields
-            label.word= data.word
+            label.word= data.id + ' ' + data.meaning
             .ui.mini.star.rating(data-rating=data.level, data-max-rating='3')
             each option in data.options
                 .field
                     .ui.radio.checkbox
-                        input.hidden(tabindex='0', name=data.word, value=option.meaning, type='radio')
+                        input.hidden(tabindex='0', name=data.id, value=option.meaning, type='radio')
                         label.option= option.meaning
 
 append stylesheets

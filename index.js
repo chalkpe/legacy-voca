@@ -33,7 +33,7 @@ const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-const flash = require('connect-flash');
+const flash = require('connect-flash-plus');
 const connect = require('connect-mongo');
 const session = require('express-session');
 const validator = require('express-validator');
@@ -54,7 +54,7 @@ app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
 const secret = require('./config/secret');
 const store = new (new connect(session))({ mongooseConnection: db });
 
-app.use(session({ secret, store, key: 'voca.sid', resave: false, saveUninitialized: false }));
+app.use(session({ secret, store, cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 }, key: 'voca.sid', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());

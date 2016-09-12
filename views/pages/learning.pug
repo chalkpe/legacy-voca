@@ -1,13 +1,13 @@
 extends ../page
 
-mixin word(data, index)
+mixin renderWord(word, index)
     .word.column
         .ui.right.aligned.container
             | #{index + 1}/#{words.length}
-            .ui.star.rating(data-rating=data.level, data-max-rating='3')
+            .ui.star.rating(data-rating=word.level, data-max-rating='3')
         .ui.vertical.animated.massive.fluid.button
-            .hidden.content= data.meaning
-            .visible.content= data.word
+            .hidden.content= word.meaning
+            .visible.content= word.id
 
 append stylesheets
     link(rel='stylesheet', type='text/css', href='/css/learning.css')
@@ -20,5 +20,5 @@ append scripts
 
 append main
     .ui.stackable.two.column.grid
-        each data, index in words
-            +word(data, index)
+        each word, index in words
+            +renderWord(word, index)

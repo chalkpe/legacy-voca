@@ -1,0 +1,7 @@
+.ui.segment table td:first-child {
+    text-transform: capitalize !important;
+}
+
+.ui.segment {
+    margin-bottom: 2em;
+}

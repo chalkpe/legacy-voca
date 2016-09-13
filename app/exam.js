@@ -40,24 +40,23 @@ function handleExam(req, res, next, here, day){
         let answredMeaning = answeredWords[wordId];
         let correctMeaning = vocabulary.get(wordId);
 
-        if(answredMeaning !== correctMeaning) wrongWords.push([wordId, correctMeaning, answredMeaning]);
+        if(answredMeaning !== correctMeaning) wrongWords.push({ id: wordId, correct: correctMeaning, answered: answredMeaning });
     })) return res.redirect(`/exam/${day.book}/${day.id}`);
 
     if(!wrongWords.length) new Result({ user: req.user._id, book: day.book, day: day.id, score: answeredWordIds.length }).save();
 
-    req.flash('result', { right: !wrongWords.length, wrongWords });
+    req.flash('result', { day, right: !wrongWords.length, wrongWords });
     res.redirect('/exam-result');
 }
 
 function handleResult(req, res, next){
-    let result = req.flash('result');
-    if(!result || !result.length){
+    let result = res.locals.result;
+    if(!result){
         var err = new Error('Forbidden');
         err.status = 403; return next(err);
     }
 
-    res.json(result);
-    //TODO: Implement result page
+    res.render('pages/result');
 }
 
 module.exports = {

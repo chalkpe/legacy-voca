@@ -9,8 +9,9 @@ function isAuthenticated(req, res, next){
 function flash(key){
     return (req, res, next) => {
         res.locals[key] = req.flash(key);
-        req.flash(key, res.locals[key]);
-        
+        if(Array.isArray(res.locals[key])) res.locals[key] = res.locals[key][0];
+
+        console.log('flash', JSON.stringify(res.locals[key]));
         next();
     };
 }

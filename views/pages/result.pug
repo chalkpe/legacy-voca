@@ -1,0 +1,35 @@
+extends ../page
+
+append stylesheets
+    link(rel='stylesheet', type='text/css', href='/css/result.css')
+
+append main
+    .ui.center.aligned.container
+        .ui.text.header
+            h1.ui.big.icon.header
+                if result.right
+                    i.green.checkmark.icon
+                    .content Congratulations!
+                else
+                    i.red.remove.icon
+                    .content Oops!
+
+        if !result.right
+            .ui.stacked.segment
+                table.ui.striped.large.table
+                    thead
+                        tr
+                            th Word
+                            th Meaning
+                            th Yours
+                    tbody
+                        for word in result.wrongWords
+                            tr
+                                td= word.id
+                                td= word.correct
+                                td= word.answered
+
+        a.ui.big.button(href='/exam/' + result.day.book + '/' + result.day.id) Retry
+        a.ui.big.primary.button(href='/')
+            | Back to home
+            i.chevron.right.icon

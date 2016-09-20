@@ -1,5 +1,8 @@
-append scripts
-    script(src='/js/sign-up.js')
+h1.ui.header
+    img.ui.circular.image(src='favicon.png', width='1em', height='1em')
+    .content
+        | #{title || 'Voca'}
+        .sub.header= vocaPackage.description
 
 #form
     include error

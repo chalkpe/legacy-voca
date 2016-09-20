@@ -1,4 +1,4 @@
-const vocaPackage = require('../package.json');
+const profile = require('./pages/profile');
 
 function isAuthenticated(req, res, next){
     if(!req.isAuthenticated()) return res.redirect('/');
@@ -33,8 +33,8 @@ function validateSignIn(req, res, next){
     let errors = req.validationErrors();
     if(!errors) return next();
 
-    req.flash('messages', errors);
-    res.redirect('/');
+    req.flash('message', errors.map(e => e.msg));
+    res.redirect('/sign-in');
 }
 
 module.exports = (app, passport) => {
@@ -44,7 +44,7 @@ module.exports = (app, passport) => {
         next();
     });
 
-    app.get('/', flashMessage, (req, res) => res.render('pages/home', { here: '/', vocaPackage }));
+    app.get('/', flashMessage, profile, (req, res) => res.render('pages/home'));
     app.post('/', validateSignUp, passport.authenticate('sign-up', {
         successRedirect: '/',
         failureRedirect: '/',

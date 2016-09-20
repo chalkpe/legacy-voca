@@ -1,4 +1,22 @@
-h2.ui.icon.header
-    i.icon.user
-    .content= user.name
-        .sub.header= user.email
+h2.ui.header
+    i.user.icon
+    .content= user.studentId + ' ' + user.name
+        .sub.header= 'Email: ' + user.email
+
+
+
+h2.ui.header Results
+
+.ui.secondary.stackable.menu
+    each book in books
+        a.item(data-tab=book.id)
+            | #{book.name}
+            .ui.label= results[book.id].length
+
+each book in books
+    .ui.tab.segment(data-tab=book.id)
+        each result in results[book.id]
+            .ui.label= result.day
+            | &nbsp;
+        else
+            | You haven't submitted anything yet!

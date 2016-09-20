@@ -2,15 +2,13 @@ extends ../page
 
 append stylesheets
     link(rel='stylesheet', type='text/css', href='/css/home.css')
+    link(rel='stylesheet', type='text/css', href='/css/' + (user ? 'profile' : 'sign-up') + '.css')
+
+append scripts
+    script(src='/js/' + (user ? 'profile' : 'sign-up') + '.js')
 
 append main
-    h1.ui.header
-        img.ui.circular.image(src='favicon.png', width='1em', height='1em')
-        .content
-            | #{title || 'Voca'}
-            .sub.header= vocaPackage.description
-
-    if !user
-        include ../includes/sign-up
-    else
+    if user
         include ../includes/profile
+    else
+        include ../includes/sign-up

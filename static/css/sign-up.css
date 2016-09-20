@@ -1,0 +1,13 @@
+@media only screen and (min-width: 768px) {
+    #main {
+        max-width: 512px !important;
+    }
+}
+
+#form {
+    margin-top: 2em !important;
+}
+
+.ui.header > .image, .ui.header > img {
+    width: 2em;
+}

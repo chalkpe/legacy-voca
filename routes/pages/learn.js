@@ -1,7 +1,7 @@
 const Day = require('../../models/Day');
 
 function renderLearning(req, res, next, here, day){
-    res.render('pages/learning', { here, words: day.words });
+    res.render('pages/learning', { here, day });
 }
 
 module.exports = (app) => {

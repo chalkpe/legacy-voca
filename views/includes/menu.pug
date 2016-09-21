@@ -1,13 +1,13 @@
 mixin menu(href, icon, classes)
     a.item(class=(here === href ? ' active' : '') + (classes ? ' ' + classes : ''), href=href)
         if icon
-            i(class=icon + " icon")
+            i(class=icon + ' icon')
 
 .ui.inverted.fixed.borderless.large.icon.menu
     .ui.container
         +menu('/',         'home', 'header')
         +menu('/learn',    'book')
-        +menu('/exam',     'star')
+        +menu('/exam',     'sticky note')
         +menu('/download', 'download')
         .right.menu
             if !user

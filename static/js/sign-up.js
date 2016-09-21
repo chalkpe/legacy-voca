@@ -2,6 +2,7 @@ $(function(){
     $('.ui.checkbox').checkbox();
 
     $('.ui.form').form({
+        inline: true, on: 'blur',
         fields: {
             email: 'email',
             password: 'minLength[8]',

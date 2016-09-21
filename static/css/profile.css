@@ -1,3 +1,7 @@
-.ui.tab.segment {
-    margin: 0;
+.ui.cards {
+    margin-top: 0;
+}
+
+#score {
+    margin-bottom: 0.3em;
 }

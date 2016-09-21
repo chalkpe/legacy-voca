@@ -8,7 +8,7 @@ function renderBooks(req, res, next, here, books){
 }
 
 function renderBook(req, res, next, here, book){
-    res.render('pages/book', { here, book: book.id, count: book.count });
+    res.render('pages/book', { here, book });
 }
 
 function isAuthenticated(req, res, next){

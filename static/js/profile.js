@@ -1,3 +1,3 @@
 $(function(){
-    $('.menu .item').tab();
+
 });

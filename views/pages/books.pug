@@ -8,6 +8,6 @@ mixin card(book)
             .header= book.name
 
 append main
-    .ui.centered.four.doubling.cards
+    .ui.centered.three.stackable.cards
         each book in books
             +card(book)

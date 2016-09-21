@@ -3,10 +3,7 @@ extends ../page
 mixin word(data, index)
     .word.sixteen.wide.mobile.eight.wide.tablet.four.wide.computer.column
         .grouped.fields
-            if magic
-                label.word= data.id + '(' + data.meaning + ')'
-            else
-                label.word= data.id
+            label.word= data.id + (magic ? ' (' + data.meaning + ')' : '')
             .ui.mini.star.rating(data-rating=data.level, data-max-rating='3')
             each option in data.options
                 .field

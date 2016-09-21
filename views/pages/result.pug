@@ -29,6 +29,8 @@ append main
                                 td= word.correct
                                 td= word.answered
 
+        if !result.right
+            a.ui.big.button(href='/learn/' + result.day.book + '/' + result.day.id) Relearn
         a.ui.big.button(href='/exam/' + result.day.book + '/' + result.day.id) Retry
         a.ui.big.primary.button(href='/')
             | Back to home

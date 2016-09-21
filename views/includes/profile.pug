@@ -1,22 +1,16 @@
-h2.ui.header
+h3.ui.horizontal.divider.header
     i.user.icon
-    .content= user.studentId + ' ' + user.name
-        .sub.header= 'Email: ' + user.email
+    | #{user.studentId + ' ' + user.name}
 
-
-
-h2.ui.header Results
-
-.ui.secondary.stackable.menu
+.ui.stackable.three.cards
     each book in books
-        a.item(data-tab=book.id)
-            | #{book.name}
-            .ui.label= results[book.id].length
-
-each book in books
-    .ui.tab.segment(data-tab=book.id)
-        each result in results[book.id]
-            .ui.label= result.day
-            | &nbsp;
-        else
-            | You haven't submitted anything yet!
+        .ui.card
+            .content
+                a.header(href='/learn/' + book.id)= book.name
+                .meta= 'Passed ' + results[book.id].length + '/' + book.count + ' exams'
+                .description
+                    each result in results[book.id]
+                        a.ui.label(href='/learn/' + book.id + '/' + result.day)= result.day
+                        | &nbsp;
+                    else
+                        | You haven't passed any exams yet!

@@ -43,10 +43,13 @@ function handleExam(req, res, next, here, day){
         if(answredMeaning !== correctMeaning) wrongWords.push({ id: wordId, correct: correctMeaning, answered: answredMeaning });
     })) return res.redirect(`/exam/${day.book}/${day.id}`);
 
-    if(!wrongWords.length) new Result({ user: req.user._id, book: day.book, day: day.id, score: answeredWordIds.length }).save();
+    let finish = () => {
+        req.flash('result', { day, right: !wrongWords.length, wrongWords });
+        res.redirect('/exam-result');
+    };
 
-    req.flash('result', { day, right: !wrongWords.length, wrongWords });
-    res.redirect('/exam-result');
+    if(wrongWords.length) finish();
+    else new Result({ user: req.user._id, book: day.book, day: day.id, score: answeredWordIds.length }).save(err => err ? next(err) : finish());
 }
 
 function handleResult(req, res, next){

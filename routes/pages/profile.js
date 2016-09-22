@@ -9,7 +9,11 @@ module.exports = Book.middleware('/', (req, res, next, here, books) => {
     res.locals.vocaPackage = vocaPackage;
 
     if(!req.isAuthenticated()) next();
-    else Result.find({ user: req.user._id }).sort({ book: 1, day: 1 }).exec((err, results) => {
+    else Result.aggregate([
+        { $match: { user: req.user._id } },
+        { $group: { _id: { book: '$book', day: '$day' }, count: { $sum: 1 } } },
+        { $sort: { '_id.book': 1, '_id.day': 1 } }
+    ], (err, results) => {
         if(err) return next(err);
 
         let r = { total: results.length };

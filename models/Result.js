@@ -5,5 +5,5 @@ const schema = mongoose.Schema({
     book: String, day: Number, score: Number
 });
 
-schema.index({ user: 1, book: 1, day: 1 }, { unique: true });
+schema.index({ user: 1, book: 1, day: 1 });
 module.exports = mongoose.model('Result', schema);

@@ -15,9 +15,13 @@ function validateSignUp(req, res, next){
     req.checkBody('password', 'Password must be at least 8 characters').isLength({ min: 8 });
     req.checkBody('confirm', 'Confirm password must match password field').equals(req.body.password);
     req.checkBody('name', 'Name must be at least 2 characters').isLength({ min: 2 });
-    req.checkBody('studentId', 'Student ID must be an integer').isInt();
-    req.checkBody('studentId', 'Student ID must be at least 4 characters').isLength({ min: 4 });
-    req.checkBody('studentId', 'Student ID cannot be longer than 5 characters').isLength({ max: 5 });
+    req.checkBody('grade', 'Grade must be an integer').isInt();
+    req.checkBody('grade', 'Grade must be exactly 1 character').isLength({ min: 1, max: 1 });
+    req.checkBody('class', 'Class must be an integer').isInt();
+    req.checkBody('class', 'Class must be exactly 1 character').isLength({ min: 1, max: 1 });
+    req.checkBody('number', 'Number must be an integer').isInt();
+    req.checkBody('number', 'Number must be at least 1 character').isLength({ min: 1 });
+    req.checkBody('number', 'Number cannot be longer than 2 characters').isLength({ max: 2 });
 
     let errors = req.validationErrors();
     if(!errors) return next();

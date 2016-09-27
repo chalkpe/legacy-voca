@@ -14,8 +14,8 @@ module.exports = () => {
         if(user) return done(null, false, req.flash('message', 'That email is already taken.'));
 
         var newUser = new User({
-            email, name: req.body.name,
-            studentId: req.body.studentId, subscribe: req.body.subscribe
+            email, name: req.body.name, subscribe: req.body.subscribe,
+            grade: req.body.grade, class: req.body.class, number: req.body.number
         });
 
         newUser.password = User.hash(password);

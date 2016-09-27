@@ -1,6 +1,6 @@
 h3.ui.horizontal.divider.header
     i.user.icon
-    | #{user.studentId + ' ' + user.name}
+    | #{user.grade}#{user.class}#{('0' + user.number).slice(-2)} #{user.name}
 
 .ui.stackable.three.cards
     each book in books
@@ -10,7 +10,11 @@ h3.ui.horizontal.divider.header
                 .meta= 'Passed ' + results[book.id].length + '/' + book.count + ' exams'
                 .description
                     each result in results[book.id]
-                        a.ui.label(href='/learn/' + book.id + '/' + result.day)= result.day
+                        a.ui.label(href='/learn/' + book.id + '/' + result.day, data-html=result.dates.join('<br>'))
+                            if result.count > 1
+                                each _ in [...Array(result.count - 1)]
+                                    i.star.icon
+                            | #{result.day}
                         | &nbsp;
                     else
                         | You haven't passed any exams yet!

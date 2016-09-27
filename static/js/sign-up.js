@@ -9,7 +9,9 @@ $(function(){
             confirm: 'match[password]',
 
             name: 'minLength[2]',
-            studentId: ['integer', 'minLength[4]', 'maxLength[5]']
+            grade: ['exactLength[1]', 'integer[1..9]'],
+            class: ['exactLength[1]', 'integer[1..9]'],
+            number: ['minLength[1]', 'maxLength[2]', 'integer[1..99]']
         }
     });
 

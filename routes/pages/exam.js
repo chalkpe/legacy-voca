@@ -15,7 +15,7 @@ function flash(key){
 }
 
 function renderExam(req, res, next, here, day){
-    res.render('pages/exam', { here, book: day.book, day: day.id, words: exam.pickWords(day) });
+    res.render('pages/exam', { here, book: day.book, day: day.id, words: exam.pickWords(day), magic: 'magic' in req.query });
 }
 
 module.exports = (app) => {

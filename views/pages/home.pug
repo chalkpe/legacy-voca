@@ -1,7 +1,6 @@
 extends ../page
 
 append stylesheets
-    link(rel='stylesheet', type='text/css', href='/css/home.css')
     link(rel='stylesheet', type='text/css', href='/css/' + (user ? 'profile' : 'sign-up') + '.css')
 
 append scripts

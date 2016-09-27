@@ -24,16 +24,20 @@ h1.ui.header
                     i.lock.icon
                     input(name='confirm', placeholder='Confirm password', type='password', minlength='8')
         .fields
-            .field
+            .three.wide.field
+                label Grade
+                input(name='grade', placeholder='Grade', type='text', minlength='1')
+            .three.wide.field
+                label Class
+                input(name='class', placeholder='Class', type='text', minlength='1')
+            .four.wide.field
+                label Number
+                input(name='number', placeholder='Number', type='text', minlength='1')
+            .six.wide.field
                 label Name
                 .ui.left.icon.input
                     i.user.icon
                     input(name='name', placeholder='Name', type='text')
-            .field
-                label Student ID
-                .ui.left.icon.input
-                    i.student.icon
-                    input(name='studentId', placeholder='Student ID', type='text', maxlength='10')
         .inline.field
             .ui.checkbox
                 input.hidden(name='subscribe', type='checkbox')

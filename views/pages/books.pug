@@ -8,6 +8,13 @@ mixin card(book)
             .header= book.name
 
 append main
+    h3.ui.horizontal.divider.header
+        case here
+            when '/learn':    i.book.icon
+            when '/exam':     i.sticky.note.icon
+            when '/download': i.download.icon
+        | #{here[1].toUpperCase() + here.slice(2).toLowerCase()}
+
     .ui.centered.three.stackable.cards
         each book in books
             +card(book)

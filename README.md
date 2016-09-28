@@ -2,9 +2,8 @@
 Online vocabulary exercise
 
 ## Requirements
-- Node.js v6
-- MongoDB
-- Nginx
+- Node.js v6.7.0
+- MongoDB v3.2.9
 
 ## Installation
 ```bash

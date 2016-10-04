@@ -41,6 +41,7 @@ const validator = require('express-validator');
 const app = express();
 app.set('view engine', 'pug');
 app.set('port', process.env.PORT || '8080');
+app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -49,7 +50,7 @@ app.use(validator());
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'static')));
-app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
+app.use('/bower', express.static(path.join(__dirname, 'bower_components')));
 
 const secret = require('./config/secret');
 const store = new (new connect(session))({ mongooseConnection: db });

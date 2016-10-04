@@ -1,0 +1,26 @@
+{
+  "name": "voca",
+  "description": "Online vocabulary exercise",
+  "main": "index.js",
+  "authors": [
+    "Chalk <chalk@chalk.pe> (http://chalk.pe)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "dimigo",
+    "voca"
+  ],
+  "homepage": "https://github.com/ChalkPE/voca",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pickadate": "^3.5.6",
+    "jquery": "^3.1.1",
+    "semantic": "semantic-ui#^2.2.4"
+  }
+}

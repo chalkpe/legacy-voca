@@ -8,7 +8,7 @@ Online vocabulary exercise
 ## Installation
 ```bash
 $ git clone https://github.com/ChalkPE/voca.git
-$ cd voca && npm install && npm run server
+$ cd voca && npm install && bower install && npm run server
 ```
 
 ## License

@@ -1,6 +1,6 @@
 h3.ui.horizontal.divider.header
-    i.user.icon
-    | #{user.grade}#{user.class}#{('0' + user.number).slice(-2)} #{user.name}
+    i.sticky.note.icon
+    | Passed exams
 
 .ui.stackable.three.cards
     each book in books
@@ -18,3 +18,7 @@ h3.ui.horizontal.divider.header
                         | &nbsp;
                     else
                         | You haven't passed any exams yet!
+
+h3.ui.horizontal.divider.header
+    i.checked.calendar.icon
+    | Passed weekly tests

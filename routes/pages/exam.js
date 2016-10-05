@@ -1,10 +1,7 @@
 const Day = require('../../models/Day');
-const exam = require('../../app/exam');
+const Book = require('../../models/Book');
 
-function isAuthenticated(req, res, next){
-    if(!req.isAuthenticated()) return res.redirect('/sign-in');
-    next();
-}
+const exam = require('../../app/exam');
 
 function flash(key){
     return (req, res, next) => {
@@ -15,13 +12,17 @@ function flash(key){
 }
 
 function renderExam(req, res, next, here, day){
-    res.render('pages/exam', { here, book: day.book, day: day.id, words: exam.pickWords(day), magic: 'magic' in req.query });
+    res.render('pages/exam', {
+        here, book: day.book, day: day.id,
+        words: exam.pickWords(day), magic: 'magic' in req.query
+    });
 }
 
-module.exports = (app) => {
-    app.get('/exam-result', isAuthenticated, flash('result'), exam.handleResult);
+module.exports = (app, common) => {
+    app.get('/exam-result',      common.isAuthenticated, flash('result'), exam.handleResult);
+    app.post('/exam/:book/:day', common.isAuthenticated, Day.middleware('/exam', exam.handleExam));
 
-    app.get('/exam/:book/:day', isAuthenticated, flash('message'), Day.middleware('/exam', renderExam));
-    app.post('/exam/:book/:day', isAuthenticated, Day.middleware('/exam', exam.handleExam));
-
+    app.get('/exam/:book/:day', common.isAuthenticated, flash('message'), Day.middleware('/exam', renderExam));
+    app.get('/exam/:book',      common.isAuthenticated, Book.middleware('/exam', common.renderBook));
+    app.get('/exam',            common.isAuthenticated, Book.middleware('/exam', common.renderBooks));
 };

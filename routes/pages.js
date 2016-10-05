@@ -1,3 +1,5 @@
+const dependencies = ['learn', 'exam', 'download'];
+
 const common = {
     renderBooks(req, res, next, here, books){
         res.render('pages/books', { here, books });
@@ -8,9 +10,17 @@ const common = {
     },
 
     isAuthenticated(req, res, next){
-        if(!req.isAuthenticated()) return res.redirect('/sign-in');
-        next();
+        if(req.isAuthenticated()) next();
+        else res.redirect('/sign-in');
+    },
+
+    flash(key){
+        return (req, res, next) => {
+            res.locals[key] = req.flash(key);
+            if(Array.isArray(res.locals[key])) res.locals[key] = res.locals[key][0];
+            next();
+        };
     }
 };
 
-module.exports = (app) => ['exam', 'learn', 'download'].map(m => require(`./pages/${m}`)).forEach(m => m(app, common));
+module.exports = (app) => dependencies.map(d => require(`./pages/${d}`)).forEach(m => m(app, common));

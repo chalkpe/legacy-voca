@@ -1,5 +1,7 @@
 const shuffle = require('shuffle-array');
+
 const Result = require('../models/Result');
+const WeeklyTest = require('../models/WeeklyTest');
 
 const wordsPerDay = 10;
 const optionsPerWord = 5;
@@ -15,6 +17,12 @@ function pickWords(day){
     });
 
     return words;
+}
+
+function handleBook(req, res, next, here, book){
+    WeeklyTest.findAvailable(book, new Date(), (err, test) => {
+        res.render('pages/book', { here, book, test });
+    });
 }
 
 function handleExam(req, res, next, here, day){
@@ -64,6 +72,7 @@ function handleResult(req, res, next){
 
 module.exports = {
     pickWords,
+    handleBook,
     handleExam,
     handleResult
 };

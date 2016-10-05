@@ -10,8 +10,10 @@ mixin menu(href, icon, classes)
         +menu('/exam',     'sticky note')
         +menu('/download', 'download')
         .right.menu
-            if !user
-                +menu('/sign-in',  'sign in')
-            else
+            if user
                 +menu('/sign-out',  'sign out')
+                if user.admin && here === '/'
+                    a.active.red.item(href='/admin') Admin
+            else
+                +menu('/sign-in',  'sign in')
             block rightMenu

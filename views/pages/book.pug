@@ -22,8 +22,8 @@ mixin days(v)
             while i <= m
                 +day(n + i++)
 
-mixin day(i)
-    a.ui.big.button(href=here + '/' + book.id + '/' + i)= ("0" + i).slice(-2)
+mixin day(i, size)
+    a.ui.button(class=size || 'big', href=here + '/' + book.id + '/' + i)= ('0' + i).slice(-2)
 
 append main
     h3.ui.horizontal.divider.header
@@ -37,6 +37,4 @@ append main
         +days(10)
 
     if here === '/exam'
-        h3.ui.horizontal.divider.header
-            i.checked.calendar.icon
-            | Weekly test
+        include ../includes/weekly-test

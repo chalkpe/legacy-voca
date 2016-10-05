@@ -15,6 +15,6 @@ module.exports = (app, common) => {
     app.post('/exam/:book/:day', common.isAuthenticated, Day.middleware('/exam', exam.handleExam));
 
     app.get('/exam/:book/:day', common.isAuthenticated, common.flash('message'), Day.middleware('/exam', renderExam));
-    app.get('/exam/:book',      common.isAuthenticated, Book.middleware('/exam', common.renderBook));
+    app.get('/exam/:book',      common.isAuthenticated, Book.middleware('/exam', exam.handleBook));
     app.get('/exam',            common.isAuthenticated, Book.middleware('/exam', common.renderBooks));
 };

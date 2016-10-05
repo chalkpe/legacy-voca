@@ -1,0 +1,21 @@
+block append scripts
+    script(src='/bower/moment/min/moment.min.js')
+
+block append stylesheets
+    link(rel='stylesheet', type='text/css', href='/css/weekly-test.css')
+
+
+h3.ui.horizontal.divider.header
+    i.checked.calendar.icon
+    | Weekly test
+
+#weeklyTest.ui.padded.center.aligned.segment
+    if test
+        h2.ui.header
+            | #{moment(test.from).format('L')} to #{moment(test.until).format('L')}
+        each i in test.days
+            .ui.day.labeled.button(tabindex='0')
+                a.ui.button(href=`${here}/${book.id}/${i}`)= ('0' + i).slice(-2)
+                .ui.basic.label Done!
+    else
+        | You have no weekly tests. Check back later!

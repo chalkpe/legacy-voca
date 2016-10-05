@@ -43,6 +43,9 @@ app.set('view engine', 'pug');
 app.set('port', process.env.PORT || '8080');
 app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
 
+const moment = require('moment');
+app.locals.moment = moment;
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

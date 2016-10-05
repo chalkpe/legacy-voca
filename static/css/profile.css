@@ -1,3 +1,7 @@
+.ui.header.beforeCards {
+    margin-bottom: 0.25rem;
+}
+
 .ui.cards {
     margin-top: 0;
 }

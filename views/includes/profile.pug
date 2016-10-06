@@ -7,9 +7,9 @@ h3.ui.horizontal.divider.header.beforeCards
         .ui.card
             .content
                 a.header(href='/learn/' + book.id)= book.name
-                .meta= 'Passed ' + results[book.id].length + '/' + book.count + ' exams'
+                .meta= 'Passed ' + results.exams[book.id].length + '/' + book.count + ' exams'
                 .description
-                    each result in results[book.id]
+                    each result in results.exams[book.id]
                         a.ui.label(href='/learn/' + book.id + '/' + result.day, data-html=result.dates.join('<br>'))
                             if result.count > 1
                                 each _ in [...Array(result.count - 1)]
@@ -24,4 +24,7 @@ h3.ui.horizontal.divider.header
     | Passed weekly tests
 
 .ui.center.aligned.padded.segment
-    | You haven't passed any weekly tests yet!
+    each result in results.weeklyTests
+        pre= JSON.stringify(result)
+    else
+        | You haven't passed any weekly tests yet!

@@ -7,16 +7,16 @@ const schema = mongoose.Schema({
     from: Date, until: Date, book: String, days: [Number]
 });
 
-schema.statics.findAvailable = function(book, date, callback){
+schema.statics.findAvailable = function(book, date, cb){
     this.findOne({ from: { $lte: date }, until: { $gte: date }, book: book.id }, (err, test) => {
-        if(err) return callback(err);
-        if(!test) return callback(null);
+        if(err) return cb(err);
+        if(!test) return cb(null);
 
-        async.map(test.days, (day, cb) => Day.findOne({ id: day }, cb), (err, results) => {
-            if(err) return callback(err);
+        async.map(test.days, (day, callback) => Day.findOne({ id: day }, callback), (err, results) => {
+            if(err) return cb(err);
 
             test.dayObjects = results;
-            callback(null, test);
+            cb(null, test);
         });
     });
 };

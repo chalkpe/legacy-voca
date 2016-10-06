@@ -3,15 +3,22 @@ const shuffle = require('shuffle-array');
 const Result = require('../models/Result');
 const WeeklyTest = require('../models/WeeklyTest');
 
-const wordsPerDay = 10;
-const optionsPerWord = 5;
+const examOption = {
+    totalWords: 10,
+    optionsPerWord: 5
+};
 
-function pickWords(day){
-    let words = shuffle.pick(day.words, { picks: Math.min(wordsPerDay, day.words.length) });
+const weeklyTestOption = {
+    totalWords: 50,
+    optionsPerWord: 5
+};
+
+function pickWords(list, options){
+    let words = shuffle.pick(list, { picks: Math.min(options.totalWords, list.length) });
 
     words.forEach(word => {
-        let otherWords = day.words.filter(w => w.meaning != word.meaning);
-        let wrongWords = shuffle.pick(otherWords, { picks: Math.min(optionsPerWord - 1, otherWords.length) });
+        let otherWords = list.filter(w => w.meaning != word.meaning);
+        let wrongWords = shuffle.pick(otherWords, { picks: Math.min(options.optionsPerWord - 1, otherWords.length) });
 
         word.options = shuffle([word, ...wrongWords]);
     });
@@ -20,14 +27,20 @@ function pickWords(day){
 }
 
 function handleBook(req, res, next, here, book){
-    WeeklyTest.findAvailable(book, new Date(), (err, test) => {
-        res.render('pages/book', { here, book, test });
+    WeeklyTest.findAvailable(book.id, new Date(), (err, test) => {
+        res.render('pages/book', { here, book, test: test || null });
     });
 }
 
+function createExam(req, res, next, here, day){
+    let words = pickWords(day.words, examOption);
+    res.render('pages/exam', { here, book: day.book, day: day.id, words });
+}
+
+// FIXME: Not working with weekly test
 function handleExam(req, res, next, here, day){
     let answeredWords = req.body;
-    let minWordCount = Math.min(wordsPerDay, day.words.length);
+    let minWordCount = Math.min(examOption.totalWords, day.words.length);
 
     let answeredWordIds = Object.keys(answeredWords);
     if(answeredWordIds.length < minWordCount){
@@ -60,19 +73,24 @@ function handleExam(req, res, next, here, day){
     else new Result({ user: req.user._id, book: day.book, day: day.id, score: answeredWordIds.length }).save(err => err ? next(err) : finish());
 }
 
-function handleResult(req, res, next){
-    let result = res.locals.result;
-    if(!result){
-        var err = new Error('Forbidden');
-        err.status = 403; return next(err);
-    }
+function handleWeeklyTest(req, res, next, here, book){
+    WeeklyTest.findAvailable(book.id, new Date(), (err, test) => {
+        if(err) return next(err);
+        if(!test) return next(null);
 
-    res.render('pages/result');
+        let list = [].concat(...test.dayObjects.map(day => day.words));
+        let words = pickWords(list, weeklyTestOption);
+
+        // TODO: Make weekly test page independent
+        res.render('pages/exam', {
+            here, book: book.id, day: 'weekly-test', words
+        });
+    });
 }
 
 module.exports = {
-    pickWords,
+    createExam,
     handleBook,
     handleExam,
-    handleResult
+    handleWeeklyTest
 };

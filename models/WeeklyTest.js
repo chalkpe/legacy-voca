@@ -4,11 +4,12 @@ const mongoose = require('mongoose');
 const Day = require('./Day');
 
 const schema = mongoose.Schema({
-    from: Date, until: Date, book: String, days: [Number]
+    from: Date, until: Date,
+    book: String, days: [Number]
 });
 
-schema.statics.findAvailable = function(book, date, cb){
-    this.findOne({ from: { $lte: date }, until: { $gte: date }, book: book.id }, (err, test) => {
+schema.statics.findAvailable = function(bookId, date, cb){
+    this.findOne({ from: { $lte: date }, until: { $gte: date }, book: bookId }, (err, test) => {
         if(err) return cb(err);
         if(!test) return cb(null);
 

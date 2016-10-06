@@ -17,7 +17,10 @@ const common = {
     flash(key){
         return (req, res, next) => {
             res.locals[key] = req.flash(key);
+
+            if('magic' in req.query) res.locals.magic = true;
             if(Array.isArray(res.locals[key])) res.locals[key] = res.locals[key][0];
+
             next();
         };
     }

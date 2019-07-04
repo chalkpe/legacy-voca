@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "server": "export NODE_ENV=production && node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -40,9 +42,11 @@
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-beta6",
     "serve-favicon": "^2.3.0",
-    "shuffle-array": "^1.0.0"
+    "shuffle-array": "^1.0.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "eslint": "^3.7.1"
-  }
+  },
+  "snyk": true
 }
